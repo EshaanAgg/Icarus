@@ -1,30 +1,14 @@
 #include "Icarus.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
+#include "Table/Table.h"
+#include "bits/stdc++.h"
 
-void Icarus::loadCSV(const std::string &filePath)
+using namespace std;
+
+string Icarus::loadCSV(const string &filePath)
 {
-    std::ifstream file(filePath);
-    if (!file.is_open())
-    {
-        std::cerr << "ERROR: Unable to open file " << filePath << std::endl;
-        return;
-    }
+    Table table = Table::createTable(filePath);
+    tables.push_back(table);
+    tableCount++;
 
-    std::string line;
-    while (std::getline(file, line))
-    {
-        std::istringstream iss(line);
-        std::string token;
-        while (std::getline(iss, token, ','))
-        {
-            std::cout << token << "\t";
-        }
-        std::cout << std::endl;
-    }
-
-    file.close();
+    return table.getName();
 }
