@@ -22,16 +22,27 @@ private:
     int fieldCount = 0;
     string name;
 
+    // The field width used while printing
+    int fieldWidth = 30;
+
     // Utility to get the file name from file path
     string parseFileName(const string &filePath);
+
+    // Utilities to display the table in the terminal
+    void printHeader();
+    void printRow(int index);
 
 public:
     // Used to create a new table from the provided filepath
     // It returns a pointer to the newly created object, which is `nullptr` if there was an error in the execution of the same
     static Table *createTable(const string &filePath);
 
-    // Traditonal getters
+    // Getters, setters and display utilitie
     string getName();
+    void setName(string name);
+    void setFieldWidth(int width);
+    vector<string> getHeaders();
+    void display();
 };
 
 #endif
