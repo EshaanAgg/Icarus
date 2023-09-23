@@ -19,10 +19,12 @@ private:
     vector<Table> tables;
     set<string> tableNames;
     int tableCount = 0;
+    int fieldWidth = 40;
 
     // Returns the name of the table that is formed after parsing the .csv file at the given location
     string loadCSV(const std::string &filePath);
     void showTables();
+    void showTable(string tableName);
 
 public:
     // Starts the interactive playground

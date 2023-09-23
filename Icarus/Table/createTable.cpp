@@ -17,14 +17,14 @@ string Table::parseFileName(const string &filePath)
     return filePath.substr(slashPos + 1, len);
 }
 
-Table *Table::createTable(const string &filePath)
+Table Table::createTable(const string &filePath)
 {
     // Check if the file exists
     ifstream file(filePath);
     if (!file.is_open())
     {
         std::cerr << "ERROR: Unable to open file " << filePath << endl;
-        return nullptr;
+        throw "FILE_DOES_NOT_EXIST";
     }
 
     // Create placeholders for data
@@ -43,7 +43,7 @@ Table *Table::createTable(const string &filePath)
     else
     {
         cerr << "ERROR: Empty CSV file. Please ensure that the first line of the file should contain the headers." << endl;
-        return nullptr;
+        throw "EMPTY_CSV_FILE";
     }
 
     // Read the data lines
@@ -64,7 +64,7 @@ Table *Table::createTable(const string &filePath)
         {
             cerr << "ERROR: Number of fields in the row does not match header." << endl;
             cerr << "Data Line: " << lineNumber << endl;
-            return nullptr;
+            throw "INCONSISTENT_DATA_IN_CSV";
         }
 
         data.push_back(rowData);
@@ -73,13 +73,12 @@ Table *Table::createTable(const string &filePath)
     file.close();
 
     // Create the new Table instance and return the same
-    Table *tablePtr = new Table();
-    Table table = *tablePtr;
+    Table table = Table();
     table.data = data;
     table.headers = headers;
     table.fieldCount = headers.size();
     table.recordCount = lineNumber;
     table.name = table.parseFileName(filePath);
 
-    return tablePtr;
+    return table;
 }

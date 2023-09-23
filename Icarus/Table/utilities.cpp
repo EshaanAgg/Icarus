@@ -7,6 +7,17 @@ string Table::getName()
 {
     return name;
 }
+
+int Table::getFieldCount()
+{
+    return fieldCount;
+}
+
+int Table::getRecordCount()
+{
+    return recordCount;
+}
+
 void Table::setName(string newName)
 {
     name = newName;
@@ -29,14 +40,14 @@ void Table::printHeader()
         cout << setw(fieldWidth) << header;
 
     cout << "\n"
-         << std::setfill('-') << setw(fieldWidth * fieldCount) << "" << setfill(' ') << endl;
+         << setfill('-') << setw(fieldWidth * fieldCount) << "" << setfill(' ') << endl;
 }
 
 void Table::printRow(int index)
 {
     cout << left;
     for (auto &item : data[index])
-        cout << setw(30) << item;
+        cout << setw(fieldWidth) << item;
     cout << "\n";
 }
 
