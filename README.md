@@ -3,7 +3,10 @@
 Icarus is a `REPL` that implements all the standard Relational Algebra Operations in CPP. Relational algebra is a procedural query language, which operates on relations (tables which are modelled using CSV files in this project) using some specified operators, such as `select`, `project`, `cartesian product`, `join`, `division`, `rename` etc. to answer user-defined queries. We use in memory storage to process all the queries, and also allow users to save the results. 
 
 The following relational algebra operations have been implemented:
+- Projection
+- Rename
 
+These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same.
 
 ## Supported REPL Commands
 
@@ -14,6 +17,9 @@ These commands are non-nestable in nature, that is they must be executed on the 
 - `LOAD <path_to_csv_file>`: Reads the provided CSV file and stores it as a table, which can be referred to by it's name in the subsequent RELP commands. The CSV files are expected to have headers, and use `,` as their delimeter. The name of the CSV file is used as the relation name by default.
 - `SHOW TABLES`: Gives a brief description of the database, with all the loaded tables, and their field and row counts.
 - `SHOW <table_name>`: Shows the records from the table that has been input by the user.
+
+### Nestable Commands
+These are the basic operators of Relation Algebra which can be nested to create complex queries. Here is a detailed documentation related to the syntax of the same:
 
 ## Available Methods for Scripting
 These functions are exported on the `Icarus` class, that can be used by the programmer to customize the behaviour of Icarus and interact with the engine programmatically. 

@@ -60,8 +60,9 @@ void Table::display()
     if (count < 0 || count > recordCount)
         cout << "The number of rows entered is invalid. Aborting the operation.\n";
 
+    cout << endl;
     printHeader();
-    for (int i = 0; i < recordCount; i++)
+    for (int i = 0; i < count; i++)
         printRow(i);
     cout << "\n";
 }

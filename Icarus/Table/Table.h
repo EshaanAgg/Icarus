@@ -37,7 +37,14 @@ public:
     // It returns a pointer to the newly created object, which is `nullptr` if there was an error in the execution of the same
     static Table createTable(const string &filePath);
 
-    // Getters, setters and display utilitie
+    // Projects the specified fieldNames from the given table into a new table with uninitialized name
+    // May throw a string error if the provided arguments are logically incoherent with respect to the table
+    Table project(vector<string> fieldNames);
+
+    // Takes a reference to a table, and renames the same to the desired new name
+    void rename(Table &table, string newName);
+
+    // Getters, setters and display utilities
     string getName();
     int getRecordCount();
     int getFieldCount();

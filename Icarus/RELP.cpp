@@ -27,6 +27,7 @@ void Icarus::execute(string input) {
         string tableName = input.substr(5);
         showTable(tableName);
     }
-    else if (input.substr(0, 5) == "LOAD ") handleLoadCSV(input);         
-    else handleUnknown(input);
+    else if (input.substr(0, 5) == "LOAD ") handleLoadCSV(input);     
+    // In the deafault case, the blank string of input must be ignored. 
+    else if (input != "") handleUnknown(input);
 }

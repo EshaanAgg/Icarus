@@ -8,12 +8,13 @@ void Icarus::showTables()
     cout << "There are currently " << tableCount << " table(s) loaded in the database.\n\n";
 
     // Diplay the headers and the divider line
-    cout << left << setw(fieldWidth) << "Table Name" << setw(fieldWidth) << "Field Count" << setw(fieldWidth) << "Row Count\n";
+    cout << left << setw(fieldWidth) << "Table Name" << setw(fieldWidth) << "Field Count" << setw(fieldWidth) << "Row Count" << endl;
     cout << setfill('-') << setw(fieldWidth * 3) << "" << setfill(' ') << endl;
 
     // Display all the data
     for (Table &table : tables)
-        cout << left << setw(fieldWidth) << table.getName() << setw(fieldWidth) << table.getFieldCount() << setw(fieldWidth) << table.getRecordCount() << "\n\n";
+        cout << left << setw(fieldWidth) << table.getName() << setw(fieldWidth) << table.getFieldCount() << setw(fieldWidth) << table.getRecordCount() << "\n";
+    cout << "\n";
 }
 
 void Icarus::showTable(string tableName)

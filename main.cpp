@@ -7,7 +7,7 @@ int main()
 
     // Load the sample data
     icarus.loadCSV("data/students.csv");
-    icarus.loadCSV("data/enrollmets.csv");
+    icarus.loadCSV("data/enrollments.csv");
     icarus.loadCSV("data/courses.csv");
 
     // Customise the field width and then start the REPL
