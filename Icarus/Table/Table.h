@@ -27,7 +27,8 @@ private:
 
 public:
     // Used to create a new table from the provided filepath
-    static Table createTable(const string &filePath);
+    // It returns a pointer to the newly created object, which is `nullptr` if there was an error in the execution of the same
+    static Table *createTable(const string &filePath);
 
     // Traditonal getters
     string getName();
