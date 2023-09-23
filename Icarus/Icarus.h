@@ -21,9 +21,10 @@ private:
     int tableCount = 0;
     int fieldWidth = 40;
 
-    // Returns the name of the table that is formed after parsing the .csv file at the given location
     void showTables();
     void showTable(string tableName);
+    // Given a `tableName` returns the index in the tables vector corresponding to it's location. Return -1 if not found
+    int getTableIndex(string tableName);
 
     // Handlers for each of the respective commands
     void handleExit();
@@ -35,7 +36,9 @@ public:
     // Starts the interactive playground
     void startRELP();
     void setFieldWidth(int width);
+    // Returns the name of the table that is formed after parsing the .csv file at the given location
     string loadCSV(const string &filePath);
+    void execute(string input);
 };
 
 #endif
