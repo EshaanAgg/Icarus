@@ -1,12 +1,25 @@
 # Icarus
 
-Icarus is a `REPL` that implements all the standard Relational Algebra Operations in CPP.
+Icarus is a `REPL` that implements all the standard Relational Algebra Operations in CPP. Relational algebra is a procedural query language, which operates on relations (tables which are modelled using CSV files in this project) using some specified operators, such as `select`, `project`, `cartesian product`, `join`, `division`, `rename` etc. to answer user-defined queries. We use in memory storage to process all the queries, and also allow users to save the results. 
 
-## Supported commands (in RELP)
+The following relational algebra operations have been implemented:
 
+
+## Supported commands
+
+### Non Nestable Commands
+These commands are non-nestable in nature, that is they must be executed on the fresh line of the REPL and cannot be merged or used with conjunction with any other commands. 
 - `HI`: Asks Icarus to introduce itself. A short sanity check!
 - `EXIT`: Exits out of the RELP.
-- `LOAD <path_to_csv_file>`: Reads the provided CSV file and stores it as a table, which can be referred to by it's name in the subsequent RELP commands,
+- `LOAD <path_to_csv_file>`: Reads the provided CSV file and stores it as a table, which can be referred to by it's name in the subsequent RELP commands. The CSV files are expected to have headers, and use `,` as their delimeter. The name of the CSV file is used as the relation name by default.
+- `SHOW TABLES`: Gives a brief description of the database, with all the loaded tables, and their field and row counts.
+- `SHOW <table_name>`: Shows the records from the table that has been input by the user.
+
+## Publically exported methods
+These functions are exported on the `Icarus` class, that can be used by the programmer to customize the behaviour of Icarus. 
+- `startREPL`: This is the main method which starts the interactive session with the user. 
+- `setFieldWidth`: Takes an `int` as argument with is used to set the width of columns outputted in the `SHOW TABLES` command. Defaults to `40`
+- `loadCSV`: Used to load a CSV to the database before starting the REPL. Takes in a `const &string` as the argument, denoting the path to the file. Equivalent to calling the `LOAD` command in the REPL. Returns `""` if the parsing resulted in some error, or with the table name that was formed. May require command line iteration. 
 
 ## Running the CLI
 

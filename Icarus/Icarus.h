@@ -22,13 +22,20 @@ private:
     int fieldWidth = 40;
 
     // Returns the name of the table that is formed after parsing the .csv file at the given location
-    string loadCSV(const std::string &filePath);
     void showTables();
     void showTable(string tableName);
+
+    // Handlers for each of the respective commands
+    void handleExit();
+    void handleHi();
+    void handleLoadCSV(string &input);
+    void handleUnknown(string &input);
 
 public:
     // Starts the interactive playground
     void startRELP();
+    void setFieldWidth(int width);
+    string loadCSV(const string &filePath);
 };
 
 #endif

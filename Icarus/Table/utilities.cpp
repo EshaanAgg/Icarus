@@ -53,7 +53,7 @@ void Table::printRow(int index)
 
 void Table::display()
 {
-    cout << "Enter the number of rows to display (between 0 and " << recordCount << ") :";
+    cout << "Enter the number of rows to display (between 0 and " << recordCount << "): ";
     int count;
     cin >> count;
 
@@ -63,4 +63,5 @@ void Table::display()
     printHeader();
     for (int i = 0; i < recordCount; i++)
         printRow(i);
+    cout << "\n";
 }
