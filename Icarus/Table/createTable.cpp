@@ -24,7 +24,7 @@ Table Table::createTable(const string &filePath)
     if (!file.is_open())
     {
         std::cerr << "ERROR: Unable to open file " << filePath << endl;
-        throw "FILE_DOES_NOT_EXIST";
+        throw "FILE_CANT_BE_OPENED";
     }
 
     // Create placeholders for data

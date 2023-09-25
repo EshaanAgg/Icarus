@@ -31,11 +31,15 @@ void Icarus::showTable(string tableName)
             table.display();
 }
 
-int Icarus::getTableIndex(string tableName) {
-    for (int i = 0; i<size(tables); i++) if (tables[i].getName() == tableName) return i;
+int Icarus::getTableIndex(string tableName)
+{
+    for (int i = 0; i < size(tables); i++)
+        if (tables[i].getName() == tableName)
+            return i;
     return -1;
 }
 
-void Icarus::setFieldWidth(int width) {
+void Icarus::setFieldWidth(int width)
+{
     fieldWidth = width;
 }

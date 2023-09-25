@@ -12,5 +12,5 @@ int main()
 
     // Customise the field width and then start the REPL
     icarus.setFieldWidth(30);
-    icarus.startRELP();
+    icarus.startREPL();
 }

@@ -34,7 +34,7 @@ private:
 
 public:
     // Starts the interactive playground
-    void startRELP();
+    void startREPL();
     void setFieldWidth(int width);
     // Returns the name of the table that is formed after parsing the .csv file at the given location
     string loadCSV(const string &filePath);
