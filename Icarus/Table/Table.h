@@ -49,6 +49,9 @@ public:
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
 
+    // As all the RA operations are sets, we need a utility to remove duplicate data entries
+    void removeDuplicates();
+
     // Getters, setters and display utilities
     string getName();
     int getRecordCount();

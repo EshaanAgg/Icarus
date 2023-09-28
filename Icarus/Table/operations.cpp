@@ -36,6 +36,7 @@ Table Table::project(vector<string> fieldNames)
         for (int fieldNo = 0; fieldNo < newTable.fieldCount; fieldNo++)
             newTable.data[recNo][fieldNo] = data[recNo][columnIndices[fieldNo]];
 
+    newTable.removeDuplicates();
     return newTable;
 }
 

@@ -5,7 +5,7 @@ Icarus is a `REPL` that implements all the standard Relational Algebra Operation
 The following relational algebra operations have been implemented:
 
 - [Projection](#project)
-- Rename
+- [Rename](#rename)
 
 These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same.
 

@@ -72,3 +72,18 @@ void Table::display(bool ask)
         printRow(i);
     cout << "\n";
 }
+
+void Table::removeDuplicates()
+{
+    set<vector<string>> dataSet;
+    vector<vector<string>> newData;
+
+    for (vector<string> &row : data)
+        if (dataSet.find(row) == dataSet.end())
+        {
+            dataSet.insert(row);
+            newData.push_back(row);
+        }
+
+    data = newData;
+}
