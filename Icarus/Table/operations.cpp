@@ -21,7 +21,7 @@ Table Table::project(vector<string> fieldNames)
         if (!found)
         {
             cerr << "The provided column name (" << fieldName << ") does not exist in the table " << name << ".\n";
-            throw "INVALID_COLUMN_NAME_ERROR";
+            throw "INVALID_COLUMN_NAME_ERROR"s;
         }
     }
 

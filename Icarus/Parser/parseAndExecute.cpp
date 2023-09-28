@@ -9,13 +9,18 @@ Table Parser::parseAndExecute(string cmd)
     {
         CommandInfo cmdInfo = cmdParser.parseCommand(cmd);
         if (supportedCommands.find(cmdInfo.command) == supportedCommands.end())
-            throw "INVALID_COMMAND: The following is not a recognised command: " + cmdInfo.command;
+        {
+            string message = "INVALID_COMMAND: The following is not a recognised command: " + cmdInfo.command;
+            throw message;
+        }
 
         // Match the command to its corresponding handler
         if (cmdInfo.command == "PROJECT")
             return performProjection(cmdInfo.arguments);
+        else if (cmdInfo.command == "RENAME")
+            return performRename(cmdInfo.arguments);
 
-        throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler.";
+        throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler."s;
     }
     catch (string error)
     {

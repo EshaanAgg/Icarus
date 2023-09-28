@@ -22,7 +22,10 @@ public:
         size_t endPos = trimmedInput.find(')');
 
         if (startPos == string::npos || endPos == string::npos || startPos >= endPos)
-            throw "INVALID_RA_COMMAND: There was an error in parsing the RA command due to invalid command format around : " + input;
+        {
+            string message = "INVALID_RA_COMMAND: There was an error in parsing the RA command due to invalid command format around : " + input;
+            throw message;
+        }
 
         string command = trimmedInput.substr(0, startPos);
         string argList = trimmedInput.substr(startPos + 1, endPos - startPos - 1);
@@ -35,14 +38,16 @@ public:
         {
             argEnd = argList.find(',', argStart);
             string arg;
-            if (argEnd != std::string::npos)
+            if (argEnd != string::npos)
             {
                 arg = argList.substr(argStart, argEnd - argStart);
                 argStart = argEnd + 1;
             }
             else
                 arg = argList.substr(argStart);
-            arguments.push_back(trim(arg));
+            string trimmedArg = trim(arg);
+            if (trimmedArg.size() != 0)
+                arguments.push_back(trimmedArg);
         }
 
         return {command, arguments};
@@ -56,7 +61,7 @@ public:
         size_t startPos = trimmedInput.find('(');
         size_t endPos = trimmedInput.find(')');
 
-        return startPos == string::npos && endPos == string::npos;
+        return !(startPos == string::npos && endPos == string::npos);
     }
 
 private:

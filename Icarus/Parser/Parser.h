@@ -18,11 +18,12 @@ using namespace std;
 class Parser
 {
 private:
-    set<string> supportedCommands = {"PROJECT"};
+    set<string> supportedCommands = {"PROJECT", "RENAME"};
     CommandParser cmdParser;
     Icarus *icarus = nullptr;
 
     Table performProjection(vector<string> args);
+    Table performRename(vector<string> args);
 
 public:
     // Used to set the parent Icarus object

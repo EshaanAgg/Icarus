@@ -28,6 +28,8 @@ private:
     // Utility to get the file name from file path
     static string parseFileName(const string &filePath);
 
+    static Table createTableFromStream(istream &stream, string tableName);
+
     // Utilities to display the table in the terminal
     void printHeader();
     void printRow(int index);
@@ -37,12 +39,15 @@ public:
     // It returns a pointer to the newly created object, which is `nullptr` if there was an error in the execution of the same
     static Table createTable(const string &filePath);
 
+    // Used as a utility function to create table's on the fly by other components of the REPL
+    static Table createTableFromData(const string &data);
+
     // Projects the specified fieldNames from the given table into a new table with uninitialized name
     // May throw a string error if the provided arguments are logically incoherent with respect to the table
     Table project(vector<string> fieldNames);
 
     // Takes a reference to a table, and renames the same to the desired new name
-    void rename(Table &table, string newName);
+    static void rename(Table &table, string newName);
 
     // Getters, setters and display utilities
     string getName();

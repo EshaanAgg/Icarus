@@ -67,7 +67,6 @@ void Table::display(bool ask)
         }
     }
 
-    cout << endl;
     printHeader();
     for (int i = 0; i < count; i++)
         printRow(i);

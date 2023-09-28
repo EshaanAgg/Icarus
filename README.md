@@ -4,7 +4,7 @@ Icarus is a `REPL` that implements all the standard Relational Algebra Operation
 
 The following relational algebra operations have been implemented:
 
-- Projection
+- [Projection](#project)
 - Rename
 
 These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same.
@@ -25,7 +25,26 @@ These commands are non-nestable in nature, that is they must be executed on the 
 
 ### Nestable Commands
 
-These are the basic operators of Relation Algebra which can be nested to create complex queries. Here is a detailed documentation related to the syntax of the same:
+These are the basic operators of Relation Algebra which can be nested to create complex queries. Some notes that must be kept in mind while using the same:
+
+- All the operations are CASE-SENSITIVE, for the names and commands both.
+- The REPL has an inbuilt memory, so all the data that can be populated before the execution of the said command will be remembered.
+- Table names can also have lowercase alphabets as uppercase strings are reserved for keywords.
+- The commands are whitespace agnostic.
+
+Here is a detailed documentation related to the syntax of the same:
+
+#### Project
+
+- `Syntax`: `PROJECT(table, fieldName1, fieldName2, ...)`
+- `Use`: Displays all the specificied fields from the table identified by `table`. The `table` field can be either a name of the table in the database, or another relational operator which returns a table.
+- `Sample Usage`: `PROJECT(courses, CourseID)`
+
+#### Rename
+
+- `Syntax`: `REANME(oldTableName, newTableName)`
+- `Use`: Renames an already existing table identified by `oldTableName` to `newTableName` for convinience. `oldTableName` also accepts an already existing table in the memory.
+- `Sample Usage`: `RENAME(students, stud)`
 
 ## Available Methods for Scripting
 

@@ -17,15 +17,8 @@ string Table::parseFileName(const string &filePath)
     return filePath.substr(slashPos + 1, len);
 }
 
-Table Table::createTable(const string &filePath)
+Table Table::createTableFromStream(istream &stream, string tableName)
 {
-    // Check if the file exists
-    ifstream file(filePath);
-    if (!file.is_open())
-    {
-        std::cerr << "ERROR: Unable to open file " << filePath << endl;
-        throw "FILE_CANT_BE_OPENED";
-    }
 
     // Create placeholders for data
     vector<string> headers;
@@ -33,7 +26,7 @@ Table Table::createTable(const string &filePath)
 
     // Read the header line
     string headerLine;
-    if (getline(file, headerLine))
+    if (getline(stream, headerLine))
     {
         istringstream headerStream(headerLine);
         string header;
@@ -43,13 +36,13 @@ Table Table::createTable(const string &filePath)
     else
     {
         cerr << "ERROR: Empty CSV file. Please ensure that the first line of the file should contain the headers." << endl;
-        throw "EMPTY_CSV_FILE";
+        throw "EMPTY_CSV_FILE"s;
     }
 
     // Read the data lines
     string line;
     int lineNumber = 0;
-    while (getline(file, line))
+    while (getline(stream, line))
     {
         lineNumber++;
 
@@ -64,13 +57,11 @@ Table Table::createTable(const string &filePath)
         {
             cerr << "ERROR: Number of fields in the row does not match header." << endl;
             cerr << "Data Line: " << lineNumber << endl;
-            throw "INCONSISTENT_DATA_IN_CSV";
+            throw "INCONSISTENT_DATA_IN_CSV"s;
         }
 
         data.push_back(rowData);
     }
-
-    file.close();
 
     // Create the new Table instance and return the same
     Table table = Table();
@@ -78,7 +69,31 @@ Table Table::createTable(const string &filePath)
     table.headers = headers;
     table.fieldCount = headers.size();
     table.recordCount = lineNumber;
-    table.name = table.parseFileName(filePath);
+    table.name = tableName;
 
     return table;
+}
+
+Table Table::createTable(const string &filePath)
+{
+    // Check if the file exists
+    ifstream file(filePath);
+    if (!file.is_open())
+    {
+        std::cerr << "ERROR: Unable to open file " << filePath << endl;
+        throw "FILE_CANT_BE_OPENED"s;
+    }
+
+    Table table = createTableFromStream(file, Table::parseFileName(filePath));
+    file.close();
+    return table;
+}
+
+Table Table::createTableFromData(const string &data)
+{
+    // Get the current timestamp as a string for the table name
+    time_t currentTime = time(nullptr);
+
+    istringstream inputStringStream(data);
+    return createTableFromStream(inputStringStream, "TEMP_" + to_string(currentTime));
 }

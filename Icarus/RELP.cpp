@@ -34,6 +34,7 @@ void Icarus::execute(string input)
     else if (input.substr(0, 5) == "LOAD ")
         handleLoadCSV(input);
     // In the default case, the blank string of input must be ignored.
+    // All the RA operations are supposed to return a table, which is then displayed on the console
     else if (input != "")
     {
         try
@@ -43,7 +44,7 @@ void Icarus::execute(string input)
         }
         catch (string errorCode)
         {
-            cout << "Tried executing the same with as a Relational Algebra command but recieved the following errorCode: \n"
+            cout << "Tried executing the same with as a Relational Algebra command but recieved the following error: \n"
                  << errorCode << "\n";
         }
     }
