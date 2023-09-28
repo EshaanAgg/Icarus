@@ -23,8 +23,3 @@ void Icarus::handleLoadCSV(string &input)
     else
         cout << "No table loaded.\n";
 }
-
-void Icarus::handleUnknown(string &input)
-{
-    cout << "Unknown command: " << input << endl;
-}

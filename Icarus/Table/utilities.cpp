@@ -51,14 +51,21 @@ void Table::printRow(int index)
     cout << "\n";
 }
 
-void Table::display()
+void Table::display(bool ask)
 {
-    cout << "Enter the number of rows to display (between 0 and " << recordCount << "): ";
-    int count;
-    cin >> count;
+    int count = min(10, recordCount);
 
-    if (count < 0 || count > recordCount)
-        cout << "The number of rows entered is invalid. Aborting the operation.\n";
+    if (ask)
+    {
+        cout << "Enter the number of rows to display (between 0 and " << recordCount << "): ";
+        cin >> count;
+
+        if (count < 0 || count > recordCount)
+        {
+            cout << "The number of rows entered is invalid. Aborting the operation.\n";
+            return;
+        }
+    }
 
     cout << endl;
     printHeader();

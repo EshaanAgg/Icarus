@@ -28,7 +28,7 @@ void Icarus::showTable(string tableName)
     cout << "\n";
     for (Table &table : tables)
         if (table.getName() == tableName)
-            table.display();
+            table.display(true);
 }
 
 int Icarus::getTableIndex(string tableName)

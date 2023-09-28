@@ -51,7 +51,8 @@ public:
     void setName(string name);
     void setFieldWidth(int width);
     vector<string> getHeaders();
-    void display();
+    // Requires the bool `ask`, which tells the compiler whether to ask for the number of rows or not. If `ask` if false, the first 10 rows are printed.
+    void display(bool ask);
 };
 
 #endif

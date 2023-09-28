@@ -1,4 +1,5 @@
 #include "Icarus.h"
+#include "Parser/Parser.h"
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -33,7 +34,16 @@ void Icarus::execute(string input)
     }
     else if (input.substr(0, 5) == "LOAD ")
         handleLoadCSV(input);
-    // In the deafault case, the blank string of input must be ignored.
+    // In the default case, the blank string of input must be ignored.
     else if (input != "")
-        handleUnknown(input);
+    {
+        try
+        {
+            parser.parseAndExecute(input);
+        }
+        catch (string errorCode)
+        {
+            cout << "Tried executing the same with as a Relational Algrebra command but recieved the following errorCode: " << errorCode << "\n";
+        }
+    }
 }

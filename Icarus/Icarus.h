@@ -10,6 +10,8 @@
 
 #include <string>
 #include "Table/Table.h"
+#include "Parser/Parser.h"
+
 using namespace std;
 
 class Icarus
@@ -20,6 +22,7 @@ private:
     set<string> tableNames;
     int tableCount = 0;
     int fieldWidth = 40;
+    Parser parser;
 
     void showTables();
     void showTable(string tableName);
@@ -30,7 +33,6 @@ private:
     void handleExit();
     void handleHi();
     void handleLoadCSV(string &input);
-    void handleUnknown(string &input);
 
 public:
     // Starts the interactive playground
