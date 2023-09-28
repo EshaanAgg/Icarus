@@ -2,7 +2,7 @@
 
 /*
  * Parser
- * TODO
+ * Used for the parsing of the relation algrebra commands and executing the same
  */
 
 #ifndef PARSER_H

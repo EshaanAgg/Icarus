@@ -56,6 +56,7 @@ public:
     string getName();
     int getRecordCount();
     int getFieldCount();
+    vector<vector<string>> getData();
     void setName(string name);
     void setFieldWidth(int width);
     vector<string> getHeaders();

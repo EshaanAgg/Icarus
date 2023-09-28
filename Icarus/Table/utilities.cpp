@@ -33,6 +33,11 @@ void Table::setFieldWidth(int width)
     fieldWidth = width;
 }
 
+vector<vector<string>> Table::getData()
+{
+    return data;
+}
+
 void Table::printHeader()
 {
     cout << left;
