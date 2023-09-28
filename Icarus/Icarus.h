@@ -16,6 +16,8 @@ using namespace std;
 
 class Icarus
 {
+    friend class Parser;
+
 private:
     string REPLDemarcator = ">> ";
     vector<Table> tables;
@@ -35,6 +37,9 @@ private:
     void handleLoadCSV(string &input);
 
 public:
+    // Create a default constructor to set the Icarus instance on the parser
+    Icarus();
+
     // Starts the interactive playground
     void startREPL();
     void setFieldWidth(int width);

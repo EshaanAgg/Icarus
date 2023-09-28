@@ -2,24 +2,33 @@
 
 /*
  * Parser
- * Class definiton for the Parser object, which parses the relational algebra commands and calls the relevant functions
+ * TODO
  */
 
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "commandParser.cpp";
 #include <bits/stdc++.h>
+#include "commandParser.cpp"
+
+class Icarus;
+
 using namespace std;
 
 class Parser
 {
 private:
+    set<string> supportedCommands = {"PROJECT"};
     CommandParser cmdParser;
-    void performProjection(vector<string> args);
+    Icarus *icarus = nullptr;
+
+    Table performProjection(vector<string> args);
 
 public:
-    void parseAndExecute(string cmd);
+    // Used to set the parent Icarus object
+    void setIcarus(Icarus *ic);
+
+    Table parseAndExecute(string cmd);
 };
 
 #endif

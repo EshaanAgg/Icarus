@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 struct CommandInfo
 {
     string command;
-    vector<std::string> arguments;
-    bool isRACommand;
+    vector<string> arguments;
 };
 
 // A class to encapsulate parsing of commands
@@ -45,7 +45,18 @@ public:
             arguments.push_back(trim(arg));
         }
 
-        return {command, arguments, true};
+        return {command, arguments};
+    }
+
+    static bool isCommand(const string &input)
+    {
+        // Remove leading and trailing whitespace
+        string trimmedInput = trim(input);
+
+        size_t startPos = trimmedInput.find('(');
+        size_t endPos = trimmedInput.find(')');
+
+        return startPos == string::npos && endPos == string::npos;
     }
 
 private:

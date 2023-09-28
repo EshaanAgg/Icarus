@@ -1,6 +1,5 @@
-#include "Icarus.h"
-#include "Parser/Parser.h"
 #include <bits/stdc++.h>
+#include "Icarus.h"
 
 using namespace std;
 
@@ -39,11 +38,13 @@ void Icarus::execute(string input)
     {
         try
         {
-            parser.parseAndExecute(input);
+            Table result = parser.parseAndExecute(input);
+            result.display(false);
         }
         catch (string errorCode)
         {
-            cout << "Tried executing the same with as a Relational Algrebra command but recieved the following errorCode: " << errorCode << "\n";
+            cout << "Tried executing the same with as a Relational Algebra command but recieved the following errorCode: \n"
+                 << errorCode << "\n";
         }
     }
 }

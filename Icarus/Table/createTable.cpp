@@ -1,5 +1,5 @@
+#include <bits/stdc++.h>
 #include "Table.h"
-#include "bits/stdc++.h"
 
 using namespace std;
 
