@@ -23,6 +23,8 @@ These are the basic operators of Relation Algebra which can be nested to create 
 
 Here is a detailed documentation related to the syntax of the same:
 
+---
+
 ### Select
 
 #### Syntax
@@ -44,6 +46,8 @@ Here is a detailed documentation related to the syntax of the same:
 
 `SELECT(students, RollNo >= 14123006 && Department = 'CSE')`
 
+---
+
 ### Project
 
 #### Syntax
@@ -58,6 +62,8 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `PROJECT(courses, CourseID)`
+
+---
 
 ### Rename
 

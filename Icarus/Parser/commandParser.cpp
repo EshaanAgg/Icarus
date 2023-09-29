@@ -18,39 +18,69 @@ public:
         // Remove leading and trailing whitespace
         string trimmedInput = trim(input);
 
-        size_t startPos = trimmedInput.find('(');
-        size_t endPos = trimmedInput.find(')');
+        string command = "";
+        string arg = "";
+        vector<string> args;
+        int balance = 0;
 
-        if (startPos == string::npos || endPos == string::npos || startPos >= endPos)
+        for (int i = 0; i < trimmedInput.size(); i++)
         {
-            string message = "INVALID_RA_COMMAND: There was an error in parsing the RA command due to invalid command format around : " + input;
-            throw message;
-        }
-
-        string command = trimmedInput.substr(0, startPos);
-        string argList = trimmedInput.substr(startPos + 1, endPos - startPos - 1);
-
-        vector<string> arguments;
-        size_t argStart = 0;
-        size_t argEnd = 0;
-
-        while (argEnd != string::npos)
-        {
-            argEnd = argList.find(',', argStart);
-            string arg;
-            if (argEnd != string::npos)
+            char c = trimmedInput[i];
+            if (balance == 0)
             {
-                arg = argList.substr(argStart, argEnd - argStart);
-                argStart = argEnd + 1;
+                if (c == '(')
+                    balance++;
+                else
+                    command += c;
+                continue;
+            }
+
+            if (c == '(')
+            {
+                balance++;
+                arg += c;
+            }
+            else if (c == ')')
+            {
+                balance--;
+                if (balance == 0)
+                {
+                    args.push_back(arg);
+                    i++;
+                    while (i < trimmedInput.size())
+                    {
+                        if (!isspace(trimmedInput[i]))
+                            throw "SYNTAX_ERROR: Only one command can be executed in the REPL at a time";
+                        i++;
+                    }
+                }
+                arg += c;
+            }
+            else if (c == ',')
+            {
+                if (balance == 1)
+                {
+                    args.push_back(arg);
+                    arg = "";
+                }
+                else
+                    arg += c;
             }
             else
-                arg = argList.substr(argStart);
-            string trimmedArg = trim(arg);
-            if (trimmedArg.size() != 0)
-                arguments.push_back(trimmedArg);
+                arg += c;
         }
 
-        return {command, arguments};
+        if (balance != 0)
+            throw "INVALID_COMMAND: The brackets are not properly balanced"s;
+
+        vector<string> newArgs;
+        for (string &arg : args)
+        {
+            arg = trim(arg);
+            if (arg != "")
+                newArgs.push_back(arg);
+        }
+        return {trim(command), newArgs};
     }
 
     static bool isCommand(const string &input)
