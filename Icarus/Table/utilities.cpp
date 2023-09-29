@@ -91,4 +91,5 @@ void Table::removeDuplicates()
         }
 
     data = newData;
+    recordCount = data.size();
 }

@@ -19,6 +19,8 @@ Table Parser::parseAndExecute(string cmd)
             return performProjection(cmdInfo.arguments);
         else if (cmdInfo.command == "RENAME")
             return performRename(cmdInfo.arguments);
+        else if (cmdInfo.command == "SELECT")
+            return performSelect(cmdInfo.arguments);
 
         throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler."s;
     }

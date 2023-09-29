@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "Table.h"
+#include "ExpParser/ExpParser.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ Table Table::project(vector<string> fieldNames)
 
     // Define all the necessary attributes of the new table object
     Table newTable;
+    newTable.headers = fieldNames;
     newTable.fieldCount = size(columnIndices);
     newTable.recordCount = recordCount;
     newTable.data = vector<vector<string>>(recordCount, vector<string>(newTable.fieldCount));
@@ -43,4 +45,38 @@ Table Table::project(vector<string> fieldNames)
 void Table::rename(Table &table, string newName)
 {
     table.setName(newName);
+}
+
+Table Table::select(string filterQuery)
+{
+    Table newTable;
+    newTable.fieldCount = fieldCount;
+    ExpParser parser(filterQuery);
+
+    try
+    {
+        for (vector<string> &row : data)
+        {
+            parser.resetParser();
+            for (int index = 0; index < headers.size(); index++)
+            {
+                string dereferencingName = name + "." + headers[index];
+                parser.setFieldValue(headers[index], row[index]);
+                parser.setFieldValue(dereferencingName, row[index]);
+            }
+            if (parser.evaluateExpression())
+                newTable.data.push_back(row);
+        }
+    }
+    catch (string err)
+    {
+        cout << "There was an error in the selection query.\n";
+        throw err;
+    }
+
+    newTable.recordCount = newTable.data.size();
+    newTable.headers = headers;
+    newTable.removeDuplicates();
+
+    return newTable;
 }

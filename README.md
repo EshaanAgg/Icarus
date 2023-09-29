@@ -4,47 +4,11 @@ Icarus is a `REPL` that implements all the standard Relational Algebra Operation
 
 The following relational algebra operations have been implemented:
 
-- [Projection](#project)
-- [Rename](#rename)
+- [Selection](./DOCUMENTATION.md/#select)
+- [Projection](./DOCUMENTATION.md/#project)
+- [Rename](./DOCUMENTATION.md/#rename)
 
-These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same.
-
-## Supported REPL Commands
-
-All the commands as well names `ARE` case-sensitive in nature. All the reserved keywords would be in `UPPERCASE`.
-
-### Non Nestable Commands
-
-These commands are non-nestable in nature, that is they must be executed on the fresh line of the REPL and cannot be merged or used with conjunction with any other commands.
-
-- `HI`: Asks Icarus to introduce itself. A short sanity check!
-- `EXIT`: Exits out of the REPL.
-- `LOAD <path_to_csv_file>`: Reads the provided CSV file and stores it as a table, which can be referred to by it's name in the subsequent REPL commands. The CSV files are expected to have headers, and use `,` as their delimeter. The name of the CSV file is used as the relation name by default.
-- `SHOW TABLES`: Gives a brief description of the database, with all the loaded tables, and their field and row counts.
-- `SHOW <table_name>`: Shows the records from the table that has been input by the user.
-
-### Nestable Commands
-
-These are the basic operators of Relation Algebra which can be nested to create complex queries. Some notes that must be kept in mind while using the same:
-
-- All the operations are CASE-SENSITIVE, for the names and commands both.
-- The REPL has an inbuilt memory, so all the data that can be populated before the execution of the said command will be remembered.
-- Table names can also have lowercase alphabets as uppercase strings are reserved for keywords.
-- The commands are whitespace agnostic.
-
-Here is a detailed documentation related to the syntax of the same:
-
-#### Project
-
-- `Syntax`: `PROJECT(table, fieldName1, fieldName2, ...)`
-- `Use`: Displays all the specificied fields from the table identified by `table`. The `table` field can be either a name of the table in the database, or another relational operator which returns a table.
-- `Sample Usage`: `PROJECT(courses, CourseID)`
-
-#### Rename
-
-- `Syntax`: `REANME(oldTableName, newTableName)`
-- `Use`: Renames an already existing table identified by `oldTableName` to `newTableName` for convinience. `oldTableName` also accepts an already existing table in the memory.
-- `Sample Usage`: `RENAME(students, stud)`
+These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same. A detailed documentation of the commands you can use in the REPL can be found in the [Documentation](./DOCUMENTATION.md).
 
 ## Available Methods for Scripting
 
@@ -63,11 +27,17 @@ To make an excutable of the [`main.cpp`](./main.cpp) file, you can use the `make
 
 ## Features
 
-- Built using the `OOPS` paradigm, which all of the data of a particular class being private by default and then only being exposed by the means of getters, setters and utlity functions.
+- Built using the `OOPS` paradigm, which all of the data of a particular class being private by default and then only being exposed by the means of getters, setters and utility functions.
+- Use of pointers and referneces to ensure that no unecessary data is copied, ensuring better performance.
 - `Tables`
   - Utilities to view the table and it's content in the command line itself.
-  - When creating new tables, ensures that the names of the tables are distinct.
+  - When creating new tables, ensures that the names of the tables and well all the headers in the same are distinct. Even the regularity of the structure of the table is ensured.
   - Allows to customize the appearance of the tables being printed in the terminal.
+  - Allows implicit conversion of fields to numeric types in queries so that all the aggregate operations can be performed.
+- `Error Handling`
+  - All the features of the `REPL` are equipped with error handling to enforce syntax and meaningful updates
+  - If any error occurs, a user-friendly stack trace is shown to the user telling him where the error occured and how should he change the syntax
+  - Prevent's the crashing of program in any case.
 
 ## Try it Out!
 

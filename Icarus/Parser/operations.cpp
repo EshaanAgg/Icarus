@@ -60,3 +60,31 @@ Table Parser::performRename(vector<string> args)
     string data = "OldName, NewName\n" + args[0] + "," + args[1];
     return Table::createTableFromData(data);
 }
+
+Table Parser::performSelect(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Select operation requires 2 arguments: (Table, Selection Condition)"s;
+
+    try
+    {
+        Table table;
+        if (cmdParser.isCommand(args[0]))
+            table = parseAndExecute(args[0]);
+        else
+        {
+            int index = icarus->getTableIndex(args[0]);
+            if (index == -1)
+            {
+                string message = "INVALID_ARGS: There is no table with the name `" + args[0] + "`";
+                throw message;
+            }
+            table = icarus->tables[index];
+        }
+        return table.select(args[1]);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}

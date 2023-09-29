@@ -18,6 +18,7 @@ enum TokenType
 {
     TOK_END,
     TOK_NUMBER,
+    TOK_STRING,
     TOK_FIELD,
     TOK_OP_EQUAL,
     TOK_OP_GREATER,
@@ -52,16 +53,17 @@ private:
     Token getNextToken();
 
     bool isComparisionOperator(Token &token);
-    bool applyComparisionOperator(TokenType &op, string &op1, string &op2);
+    bool applyComparisionOperator(TokenType &op, string &op1, string &op2, bool asNumber);
     bool isLogicalOperator(Token &token);
     bool applyLogicalOperator(TokenType &op, bool &op1, bool &op2);
+    bool isValue(Token &token);
     bool precedenceHigher(TokenType &t1, TokenType &t2);
-    bool evaluateExpression();
 
 public:
     ExpParser(string &expression);
+    void setFieldValue(string field, string value);
     void resetParser();
-    bool checkRow(Table &table, int rowIndex);
+    bool evaluateExpression();
 };
 
 #endif

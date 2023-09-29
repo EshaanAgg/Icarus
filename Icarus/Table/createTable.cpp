@@ -22,6 +22,7 @@ Table Table::createTableFromStream(istream &stream, string tableName)
 
     // Create placeholders for data
     vector<string> headers;
+    set<string> headerSet;
     vector<vector<string>> data;
 
     // Read the header line
@@ -31,7 +32,15 @@ Table Table::createTableFromStream(istream &stream, string tableName)
         istringstream headerStream(headerLine);
         string header;
         while (getline(headerStream, header, ','))
+        {
+            if (headerSet.find(header) != headerSet.end())
+            {
+                cerr << "ERROR: The CSV file has two fields with the same name: `" << header << "` which is not allowed. Please modify the file to resolve this error" << endl;
+                throw "NON_UNIQUE_HEADER_NAMES_IN_CSV"s;
+            }
             headers.push_back(header);
+            headerSet.insert(header);
+        }
     }
     else
     {

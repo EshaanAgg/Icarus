@@ -12,6 +12,7 @@ ExpParser::ExpParser(string &expression)
 void ExpParser::resetParser()
 {
     pos = 0;
+    fields.clear();
 }
 
 char ExpParser::peek()
@@ -47,6 +48,22 @@ Token ExpParser::getNextToken()
         while (isdigit(peek()))
             num += consume();
         return {TOK_NUMBER, num};
+    }
+
+    if (peek() == '"' || peek() == '\'')
+    {
+        char openingDelimter = peek();
+        consume();
+        string value = "";
+        while (peek() != openingDelimter)
+        {
+            if (peek() == '\0')
+                throw "INVALID SYNATX: Strings should either be enclosed in single or double quotes. Only the opening quote was found before reaching the end of the expression.";
+            value += peek();
+            consume();
+        }
+        consume();
+        return {TOK_STRING, value};
     }
 
     if (isAlpha(peek()))
@@ -138,7 +155,7 @@ Token ExpParser::getNextToken()
     }
 
     if (peek() == '\0')
-        return {TOK_END, '\0'};
+        return {TOK_END, "\0"};
 
     throw "Unrecognized character in the expression: "s + peek();
 }

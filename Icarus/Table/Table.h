@@ -15,7 +15,6 @@ using namespace std;
 class Table
 {
 private:
-    // Internal data of the Table class
     vector<string> headers;
     vector<vector<string>> data;
     int recordCount = 0;
@@ -45,6 +44,8 @@ public:
     // Projects the specified fieldNames from the given table into a new table with uninitialized name
     // May throw a string error if the provided arguments are logically incoherent with respect to the table
     Table project(vector<string> fieldNames);
+
+    Table select(string filterQuery);
 
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
