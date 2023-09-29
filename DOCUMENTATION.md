@@ -1,6 +1,8 @@
 # Documentation
 
-This guide gives a brief overview of all the supported commands in the `REPL`. It must be noted that all the commands as well names `ARE` case-sensitive in nature. All the reserved keywords would be in `UPPERCASE`.
+This guide gives a brief overview of all the supported commands in the `REPL`.
+
+It must be noted that all the commands as well names `ARE` case-sensitive in nature. All the reserved keywords would be in `UPPERCASE`. Also, all the intermediate tables created during the nesting of commands are given names corresponding to the timestamp and operation they were created at and from. These tables are not registered in the main memory as they would are just created in the context of the query.
 
 ## Non Nestable Commands
 
@@ -79,3 +81,23 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `RENAME(students, stud)`
+
+---
+
+### Product
+
+#### Syntax
+
+`PRODUCT(table1, table2)`
+
+#### Use
+
+- Used to perform a simple cross product between two tables, `table1` and `table2`.
+- Both the table fields can either be a name of the table in the database, or another relational operator which returns a table.
+- The fields are populated in the order of the tables specified.
+- If the two tables have distinct field names, then those names are retained, but if the names of two fields are same, then the columns are created by deferencing thier parents, i.e. `table1.fieldName` and `table2.fieldName`.
+- It not allowed to take the cross product of table with itself due to the above constraint. Copy and rename the table to enable the same.
+
+#### Sample
+
+`PRODUCT(courses, steudents)`

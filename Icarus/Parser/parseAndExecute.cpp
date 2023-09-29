@@ -21,6 +21,8 @@ Table Parser::parseAndExecute(string cmd)
             return performRename(cmdInfo.arguments);
         else if (cmdInfo.command == "SELECT")
             return performSelect(cmdInfo.arguments);
+        else if (cmdInfo.command == "PRODUCT")
+            return performCrossProduct(cmdInfo.arguments);
 
         throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler."s;
     }

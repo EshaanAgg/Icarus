@@ -11,6 +11,6 @@ int main()
     icarus.loadCSV("data/courses.csv");
 
     // Customise the field width and then start the REPL
-    icarus.setFieldWidth(30);
+    icarus.setFieldWidth(20);
     icarus.startREPL();
 }

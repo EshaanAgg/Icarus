@@ -28,6 +28,7 @@ private:
     static string parseFileName(const string &filePath);
 
     static Table createTableFromStream(istream &stream, string tableName);
+    static string getTimestamp();
 
     // Utilities to display the table in the terminal
     void printHeader();
@@ -46,6 +47,8 @@ public:
     Table project(vector<string> fieldNames);
 
     Table select(string filterQuery);
+
+    Table crossProduct(Table &externalTable);
 
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);

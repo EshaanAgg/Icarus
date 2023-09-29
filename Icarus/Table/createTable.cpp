@@ -19,7 +19,6 @@ string Table::parseFileName(const string &filePath)
 
 Table Table::createTableFromStream(istream &stream, string tableName)
 {
-
     // Create placeholders for data
     vector<string> headers;
     set<string> headerSet;
@@ -98,11 +97,14 @@ Table Table::createTable(const string &filePath)
     return table;
 }
 
+string Table::getTimestamp()
+{
+    time_t currentTime = time(nullptr);
+    return to_string(currentTime);
+}
+
 Table Table::createTableFromData(const string &data)
 {
-    // Get the current timestamp as a string for the table name
-    time_t currentTime = time(nullptr);
-
     istringstream inputStringStream(data);
-    return createTableFromStream(inputStringStream, "TEMP_" + to_string(currentTime));
+    return createTableFromStream(inputStringStream, "TEMP_" + getTimestamp());
 }
