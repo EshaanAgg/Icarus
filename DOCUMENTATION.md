@@ -121,6 +121,8 @@ Here is a detailed documentation related to the syntax of the same:
 
 `JOIN(students, enrollments, students.RollNo = enrollments.RollNo)`
 
+---
+
 ### Natural Join
 
 #### Syntax
@@ -138,6 +140,8 @@ Here is a detailed documentation related to the syntax of the same:
 
 `NATURAL(students, enrollments)`
 
+---
+
 ### Union
 
 #### Syntax
@@ -154,6 +158,8 @@ Here is a detailed documentation related to the syntax of the same:
 
 `UNION(studentsA, studentsB)`
 
+---
+
 ### Intersection
 
 #### Syntax
@@ -169,6 +175,8 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `INTERSECTION(studentsA, studentsB)`
+
+---
 
 ### Set Difference
 
