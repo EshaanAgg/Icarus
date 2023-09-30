@@ -100,4 +100,21 @@ Here is a detailed documentation related to the syntax of the same:
 
 #### Sample
 
-`PRODUCT(courses, steudents)`
+`PRODUCT(courses, students)`
+
+---
+
+### Save
+
+#### Syntax
+
+`SAVE(table, tableName)`
+
+#### Use
+
+- Used to store the result of a Relational Algebra expression into a table, or create a copy of an already existing name with the given `tableName`.
+- The `table` field can either be a name of the table in the database, or another relational operator which returns a table.
+
+#### Sample
+
+`SAVE(SELECT(students, RollNo), rollNumbers)`

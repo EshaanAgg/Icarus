@@ -105,3 +105,24 @@ Table Parser::performCrossProduct(vector<string> args)
         throw error;
     }
 }
+
+Table Parser::performSave(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Save operation requires 2 arguments: (table, tableName)"s;
+
+    Table table;
+    getTable(table, args[0]);
+
+    if (icarus->tableNames.find(args[1]) != icarus->tableNames.end())
+        throw "INVALID_ARGS: Table with the provided name already exists: "s + args[1];
+
+    // Save the table
+    table.setName(args[1]);
+    icarus->tableNames.insert(args[1]);
+    icarus->tables.push_back(table);
+    icarus->tableCount++;
+
+    string data = "System Message\nTable added successfully";
+    return Table::createTableFromData(data);
+}
