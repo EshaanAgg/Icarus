@@ -58,7 +58,7 @@ void Table::printRow(int index)
 
 void Table::display(bool ask)
 {
-    int count = min(10, recordCount);
+    int count = recordCount;
 
     if (ask)
     {
@@ -92,4 +92,29 @@ void Table::removeDuplicates()
 
     data = newData;
     recordCount = data.size();
+}
+
+int Table::getHeaderIndice(string header)
+{
+    for (int i = 0; i < headers.size(); i++)
+        if (headers[i] == header)
+            return i;
+    return -1;
+}
+
+vector<vector<int>> Table::getCommonHeaderIndices(Table &extTable)
+{
+    vector<int> ind1, ind2;
+
+    for (int i = 0; i < headers.size(); i++)
+    {
+        int index = extTable.getHeaderIndice(headers[i]);
+        if (index != -1)
+        {
+            ind1.push_back(i);
+            ind2.push_back(index);
+        }
+    }
+
+    return {ind1, ind2};
 }

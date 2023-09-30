@@ -104,17 +104,36 @@ Here is a detailed documentation related to the syntax of the same:
 
 ---
 
-### Save
+### Join
 
 #### Syntax
 
-`SAVE(table, tableName)`
+`JOIN(table1, table2, filterQuery)`
 
 #### Use
 
-- Used to store the result of a Relational Algebra expression into a table, or create a copy of an already existing name with the given `tableName`.
-- The `table` field can either be a name of the table in the database, or another relational operator which returns a table.
+- Used to perform a join between two tables.
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- The `filterQuery` is actually the join condition which determines on which basis should we be joining the two tables.
+- You must deference the parent in `filterQuery` if the used fields have common name in both the tables.
 
 #### Sample
 
-`SAVE(SELECT(students, RollNo), rollNumbers)`
+`JOIN(students, enrollments, students.RollNo = enrollments.RollNo)`
+
+### Natural Join
+
+#### Syntax
+
+`JOIN(table1, table2)`
+
+#### Use
+
+- Used to perform a natural join between two tables.
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- The tables used must have at-least one column with the same name that can be used to perform the join.
+- If there are multiple columns with the same name, the equality is checked on all the fields while merging the tables.
+
+#### Sample
+
+`JOIN(students, enrollments)`

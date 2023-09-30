@@ -25,6 +25,10 @@ Table Parser::parseAndExecute(string cmd)
             return performCrossProduct(cmdInfo.arguments);
         else if (cmdInfo.command == "SAVE")
             return performSave(cmdInfo.arguments);
+        else if (cmdInfo.command == "JOIN")
+            return performJoin(cmdInfo.arguments);
+        else if (cmdInfo.command == "NATURAL")
+            return performNaturalJoin(cmdInfo.arguments);
 
         throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler."s;
     }

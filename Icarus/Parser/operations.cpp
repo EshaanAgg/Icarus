@@ -23,7 +23,7 @@ void Parser::getTable(Table &tableHolder, string arg)
 Table Parser::performProjection(vector<string> args)
 {
     if (args.size() < 2)
-        throw "INVALID_ARGS: Projection operation requires >= 2 arguments: (TableName, fieldName1, fieldName2, ...)"s;
+        throw "INVALID_ARGS: Projection operation requires >= 2 arguments: (TableName, fieldName1, fieldName2, ...). You supplied "s + to_string(args.size()) + " arguments."s;
 
     try
     {
@@ -43,7 +43,7 @@ Table Parser::performProjection(vector<string> args)
 Table Parser::performRename(vector<string> args)
 {
     if (args.size() < 2)
-        throw "INVALID_ARGS: Rename operation requires 2 arguments: (OldTableName, NewTableName)"s;
+        throw "INVALID_ARGS: Rename operation requires 2 arguments: (OldTableName, NewTableName). You supplied "s + to_string(args.size()) + " arguments."s;
 
     // Check for integrity of the names
     int index = icarus->getTableIndex(args[0]);
@@ -70,7 +70,7 @@ Table Parser::performRename(vector<string> args)
 Table Parser::performSelect(vector<string> args)
 {
     if (args.size() != 2)
-        throw "INVALID_ARGS: Select operation requires 2 arguments: (Table, Selection Condition)"s;
+        throw "INVALID_ARGS: Select operation requires 2 arguments: (Table, Selection Condition). You supplied "s + to_string(args.size()) + " arguments."s;
 
     try
     {
@@ -88,7 +88,7 @@ Table Parser::performSelect(vector<string> args)
 Table Parser::performCrossProduct(vector<string> args)
 {
     if (args.size() != 2)
-        throw "INVALID_ARGS: Cross product operation requires 2 arguments: (Table1, Table2)"s;
+        throw "INVALID_ARGS: Cross product operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
 
     try
     {
@@ -109,7 +109,7 @@ Table Parser::performCrossProduct(vector<string> args)
 Table Parser::performSave(vector<string> args)
 {
     if (args.size() != 2)
-        throw "INVALID_ARGS: Save operation requires 2 arguments: (table, tableName)"s;
+        throw "INVALID_ARGS: Save operation requires 2 arguments: (table, tableName). You supplied "s + to_string(args.size()) + " arguments."s;
 
     Table table;
     getTable(table, args[0]);
@@ -125,4 +125,42 @@ Table Parser::performSave(vector<string> args)
 
     string data = "System Message\nTable added successfully";
     return Table::createTableFromData(data);
+}
+
+Table Parser::performJoin(vector<string> args)
+{
+    if (args.size() != 3)
+        throw "INVALID_ARGS: Join operation requires 3 arguments: (Table1, Table2, JoinCondition). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        return table1.join(table2, args[2]);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}
+
+Table Parser::performNaturalJoin(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Natural Join operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        return table1.naturalJoin(table2);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
 }

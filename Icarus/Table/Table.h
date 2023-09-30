@@ -26,9 +26,12 @@ private:
 
     // Utility to get the file name from file path
     static string parseFileName(const string &filePath);
-
     static Table createTableFromStream(istream &stream, string tableName);
     static string getTimestamp();
+
+    int getHeaderIndice(string header);
+
+    vector<vector<int>> getCommonHeaderIndices(Table &extTable);
 
     // Utilities to display the table in the terminal
     void printHeader();
@@ -45,11 +48,10 @@ public:
     // Projects the specified fieldNames from the given table into a new table with uninitialized name
     // May throw a string error if the provided arguments are logically incoherent with respect to the table
     Table project(vector<string> fieldNames);
-
     Table select(string filterQuery);
-
     Table crossProduct(Table &externalTable);
-
+    Table join(Table &externalTable, string filterQuery);
+    Table naturalJoin(Table &externalTable);
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
 

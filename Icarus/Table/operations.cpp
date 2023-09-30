@@ -122,3 +122,67 @@ Table Table::crossProduct(Table &extTable)
     newTable.name = "CROSS_" + getTimestamp();
     return newTable;
 }
+
+Table Table::join(Table &externalTable, string filterQuery)
+{
+    Table crossTable = crossProduct(externalTable);
+    Table joinTable = crossTable.select(filterQuery);
+
+    joinTable.name = "JOIN_" + getTimestamp();
+    return joinTable;
+}
+
+Table Table::naturalJoin(Table &externalTable)
+{
+    vector<vector<int>> commonIndices = getCommonHeaderIndices(externalTable);
+
+    if (commonIndices[0].size() == 0)
+        throw "INVALID_TABLES: The provided tables have no columns with the same name. Tables that are to be naturally-joined must have atleast one common field."s;
+
+    set<int> skipIndices(commonIndices[1].begin(), commonIndices[1].end());
+
+    Table newTable;
+
+    // Populate the headers in the new table
+    newTable.fieldCount = fieldCount + externalTable.fieldCount - skipIndices.size();
+    newTable.headers = headers;
+    for (int i = 0; i < externalTable.fieldCount; i++)
+        if (skipIndices.find(i) == skipIndices.end())
+            newTable.headers.push_back(externalTable.headers[i]);
+
+    vector<vector<string>> extData = externalTable.data;
+
+    // Populate the data
+    for (vector<string> row1 : data)
+        for (vector<string> row2 : extData)
+        {
+            // Check if we should populate these set of rows of not
+            bool match = true;
+            for (int i1 : commonIndices[0])
+            {
+                if (!match)
+                    break;
+                for (int i2 : commonIndices[1])
+                    if (row1[i1] != row2[i2])
+                    {
+                        match = false;
+                        break;
+                    }
+            }
+            if (!match)
+                continue;
+
+            // Populate the data
+            vector<string> dataRow(row1.begin(), row1.end());
+            for (int i = 0; i < externalTable.fieldCount; i++)
+                if (skipIndices.find(i) == skipIndices.end())
+                    dataRow.push_back(row2[i]);
+
+            newTable.data.push_back(dataRow);
+        }
+
+    newTable.removeDuplicates();
+    newTable.recordCount = newTable.data.size();
+    newTable.name = "NATURAL_" + getTimestamp();
+    return newTable;
+}
