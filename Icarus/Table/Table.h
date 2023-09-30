@@ -52,8 +52,13 @@ public:
     Table crossProduct(Table &externalTable);
     Table join(Table &externalTable, string filterQuery);
     Table naturalJoin(Table &externalTable);
+    Table Union(Table &externalTable);
+    Table intersection(Table &externalTable);
+    Table difference(Table &externalTable);
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
+
+    bool unionCompatible(Table &extTable);
 
     // As all the RA operations are sets, we need a utility to remove duplicate data entries
     void removeDuplicates();

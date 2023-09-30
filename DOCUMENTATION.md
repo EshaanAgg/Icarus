@@ -125,7 +125,7 @@ Here is a detailed documentation related to the syntax of the same:
 
 #### Syntax
 
-`JOIN(table1, table2)`
+`NATURAL(table1, table2)`
 
 #### Use
 
@@ -136,4 +136,52 @@ Here is a detailed documentation related to the syntax of the same:
 
 #### Sample
 
-`JOIN(students, enrollments)`
+`NATURAL(students, enrollments)`
+
+### Union
+
+#### Syntax
+
+`UNION(table1, table2)`
+
+#### Use
+
+- Used to perform a union between two tables.
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- Both the tables must be union compatible, that is they must have the same number of headers and same header names (they might be in different orders: the command would re-arrange them in the order of `table1`)
+
+#### Sample
+
+`UNION(studentsA, studentsB)`
+
+### Intersection
+
+#### Syntax
+
+`INTERSECTION(table1, table2)`
+
+#### Use
+
+- Used to perform an intersection between two tables.
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- Both the tables must be union compatible, that is they must have the same number of headers and same header names (they might be in different orders: the command would re-arrange them in the order of `table1`)
+
+#### Sample
+
+`INTERSECTION(studentsA, studentsB)`
+
+### Set Difference
+
+#### Syntax
+
+`DIFF(table1, table2)`
+
+#### Use
+
+- Used to perform a difference operation between two tables (`table1 - table2`).
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- Both the tables must be union compatible, that is they must have the same number of headers and same header names (they might be in different orders: the command would re-arrange them in the order of `table1`)
+
+#### Sample
+
+`DIFF(studentsA, studentsB)`

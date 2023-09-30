@@ -186,3 +186,77 @@ Table Table::naturalJoin(Table &externalTable)
     newTable.name = "NATURAL_" + getTimestamp();
     return newTable;
 }
+
+Table Table::Union(Table &externalTable)
+{
+    Table newTable;
+    newTable.fieldCount = fieldCount;
+    newTable.headers = headers;
+    newTable.data = data;
+
+    vector<int> headerOrder = getCommonHeaderIndices(externalTable)[1];
+    for (vector<string> &row : externalTable.data)
+    {
+        vector<string> dataRow;
+        for (int i : headerOrder)
+            dataRow.push_back(row[i]);
+        newTable.data.push_back(dataRow);
+    }
+
+    newTable.removeDuplicates();
+    newTable.recordCount = newTable.data.size();
+    newTable.name = "UNION_" + getTimestamp();
+    return newTable;
+}
+
+Table Table::intersection(Table &externalTable)
+{
+    Table newTable;
+    newTable.fieldCount = fieldCount;
+    newTable.headers = headers;
+
+    set<vector<string>> dataSet(data.begin(), data.end());
+
+    vector<int> headerOrder = getCommonHeaderIndices(externalTable)[1];
+    for (vector<string> &row : externalTable.data)
+    {
+        vector<string> dataRow;
+        for (int i : headerOrder)
+            dataRow.push_back(row[i]);
+        if (dataSet.find(dataRow) != dataSet.end())
+            newTable.data.push_back(dataRow);
+    }
+
+    newTable.removeDuplicates();
+    newTable.recordCount = newTable.data.size();
+    newTable.name = "INTERSECTION_" + getTimestamp();
+    return newTable;
+}
+
+Table Table::difference(Table &externalTable)
+{
+    Table newTable;
+    newTable.fieldCount = fieldCount;
+    newTable.headers = headers;
+
+    // Populate the external table's data as a set in the order of the headers of the primary table
+    set<vector<string>> dataSet;
+    vector<int> headerOrder = getCommonHeaderIndices(externalTable)[1];
+    for (vector<string> &row : externalTable.data)
+    {
+        vector<string> dataRow;
+        for (int i : headerOrder)
+            dataRow.push_back(row[i]);
+        dataSet.insert(dataRow);
+    }
+
+    // Populate the new table
+    for (vector<string> &row : data)
+        if (dataSet.find(row) == dataSet.end())
+            newTable.data.push_back(row);
+
+    newTable.removeDuplicates();
+    newTable.recordCount = newTable.data.size();
+    newTable.name = "DIFFERENCE_" + getTimestamp();
+    return newTable;
+}

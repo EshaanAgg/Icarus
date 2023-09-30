@@ -11,6 +11,9 @@ The following relational algebra operations have been implemented:
 - [Save](./DOCUMENTATION.md/#save)
 - [Join](./DOCUMENTATION.md/#join)
 - [Natural Join](./DOCUMENTATION.md/#natural-join)
+- [Union](./DOCUMENTATION.md/#union)
+- [Intersection](./DOCUMENTATION.md/#intersection)
+- [Set Difference](./DOCUMENTATION.md/#set-difference)
 
 These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same. A detailed documentation of the commands you can use in the REPL can be found in the [Documentation](./DOCUMENTATION.md).
 

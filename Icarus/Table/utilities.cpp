@@ -118,3 +118,11 @@ vector<vector<int>> Table::getCommonHeaderIndices(Table &extTable)
 
     return {ind1, ind2};
 }
+
+bool Table::unionCompatible(Table &externalTable)
+{
+    if (fieldCount != externalTable.fieldCount)
+        return false;
+    vector<vector<int>> commonIndices = getCommonHeaderIndices(externalTable);
+    return fieldCount == commonIndices[0].size();
+}

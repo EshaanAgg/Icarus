@@ -164,3 +164,66 @@ Table Parser::performNaturalJoin(vector<string> args)
         throw error;
     }
 }
+
+Table Parser::performUnion(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Union operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        if (!table1.unionCompatible(table2))
+            throw "The provided tables are not union compatible and thus union can't be performed on them."s;
+        return table1.Union(table2);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}
+
+Table Parser::performIntersection(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Intersection operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        if (!table1.unionCompatible(table2))
+            throw "The provided tables are not union compatible and thus intersection can't be performed on them."s;
+        return table1.intersection(table2);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}
+
+Table Parser::performDifference(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Difference operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        if (!table1.unionCompatible(table2))
+            throw "The provided tables are not union compatible and thus difference can't be performed on them."s;
+        return table1.difference(table2);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}

@@ -18,7 +18,7 @@ using namespace std;
 class Parser
 {
 private:
-    set<string> supportedCommands = {"PROJECT", "RENAME", "SELECT", "PRODUCT", "SAVE", "JOIN", "NATURAL"};
+    set<string> supportedCommands = {"PROJECT", "RENAME", "SELECT", "PRODUCT", "SAVE", "JOIN", "NATURAL", "UNION", "INTERSECTION", "DIFF"};
     CommandParser cmdParser;
     Icarus *icarus = nullptr;
 
@@ -29,6 +29,9 @@ private:
     Table performSave(vector<string> args);
     Table performJoin(vector<string> args);
     Table performNaturalJoin(vector<string> args);
+    Table performUnion(vector<string> args);
+    Table performIntersection(vector<string> args);
+    Table performDifference(vector<string> args);
 
     void getTable(Table &tableHolder, string arg);
 
