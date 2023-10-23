@@ -210,3 +210,19 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `DIVIDE(studentEnrolledCourses, courses)`
+
+### Save
+
+#### Syntax
+
+`SAVE(table, tableName)`
+
+#### Use
+
+- Used to save the provided `table` with the name `tableName`.
+- The table `table` can either be a name of the table in the database (which will result in creation of copy of the table), or another relational operator which returns a table (and thus would store in in the in memory database).
+- The name of the table that is being used must be unique.
+
+#### Sample
+
+`SAVE(SELECT(students, Department), departments)`

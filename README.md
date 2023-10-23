@@ -41,7 +41,7 @@ The [`Makefile`](./Makefile) is designed with respect to Unix based systems. You
 - Use of pointers and referneces to ensure that no unecessary data is copied, ensuring better performance.
 - Utility checks are provided to ensure the validility of the operations on the tables they are applied on
 - Supports infinite nesting of commands
-- Supports reading and writing of all the table to and from disk
+- Supports reading of all the table data from disk
 - `Tables`
   - Utilities to view the table and it's content in the command line itself.
   - When creating new tables, ensures that the names of the tables and well all the headers in the same are distinct. Even the regularity of the structure of the table is ensured.
