@@ -262,49 +262,62 @@ Table Table::difference(Table &externalTable)
 }
 
 Table Table::divide(Table &externalTable)
-{   
+{
     // Calculate the common and not common indices between the two tables and also check for division compatibility
     vector<int> notCommonIndices, commonIndices;
-    for (string header: externalTable.headers) {
+    for (string header : externalTable.headers)
+    {
         bool found = false;
-        for (int i = 0; i < fieldCount; i++) {
-            if (headers[i] == header) {
+        for (int i = 0; i < fieldCount; i++)
+        {
+            if (headers[i] == header)
+            {
                 found = true;
                 commonIndices.push_back(i);
                 break;
             }
         }
-        if (!found) 
+        if (!found)
             throw "INVALID TABLES: The divisor table has the header: "s + header + " which is not present in the dividend table"s;
     }
 
-    for (int i = 0; i < fieldCount; i++) {
+    for (int i = 0; i < fieldCount; i++)
+    {
         bool found = false;
-        for (int j: commonIndices) if (i == j) {
-            found = true;
-            break;
-        }
-        if (!found) notCommonIndices.push_back(i);
+        for (int j : commonIndices)
+            if (i == j)
+            {
+                found = true;
+                break;
+            }
+        if (!found)
+            notCommonIndices.push_back(i);
     }
 
     Table newTable;
     newTable.fieldCount = notCommonIndices.size();
-    for (int i: notCommonIndices) newTable.headers.push_back(headers[i]);
+    for (int i : notCommonIndices)
+        newTable.headers.push_back(headers[i]);
 
     // Create a set of the possible rows that can be the data of the new table
     set<vector<string>> possibleRows;
-    for (auto &row: data) {
+    for (auto &row : data)
+    {
         vector<string> candidateRow;
-        for (int i: notCommonIndices) candidateRow.push_back(row[i]);
+        for (int i : notCommonIndices)
+            candidateRow.push_back(row[i]);
         possibleRows.insert(candidateRow);
     }
 
     // Create a set from the original data restructed as notCommonFields followed by commonFields
     set<vector<string>> searchSet;
-    for (auto &row: data) {
+    for (auto &row : data)
+    {
         vector<string> candidateRow;
-        for (int i: notCommonIndices) candidateRow.push_back(row[i]);
-        for (int i: commonIndices) candidateRow.push_back(row[i]);
+        for (int i : notCommonIndices)
+            candidateRow.push_back(row[i]);
+        for (int i : commonIndices)
+            candidateRow.push_back(row[i]);
         searchSet.insert(candidateRow);
     }
 
@@ -313,15 +326,18 @@ Table Table::divide(Table &externalTable)
     {
         vector<string> prefixFields = *itr;
         bool canAdd = true;
-        for (auto suffixFields: externalTable.data) {
+        for (auto suffixFields : externalTable.data)
+        {
             vector<string> row(prefixFields.begin(), prefixFields.end());
             row.insert(row.end(), suffixFields.begin(), suffixFields.end());
-            if (searchSet.find(row) == searchSet.end()) {
+            if (searchSet.find(row) == searchSet.end())
+            {
                 canAdd = false;
                 break;
             }
         }
-        if (canAdd) newTable.data.push_back(prefixFields);
+        if (canAdd)
+            newTable.data.push_back(prefixFields);
     }
 
     newTable.removeDuplicates();

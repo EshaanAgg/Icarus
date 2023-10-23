@@ -25,7 +25,7 @@ private:
     int fieldWidth = 30;
 
     // Utility to get the file name from file path
-    static string parseFileName(const string &filePath);
+    static string parseFileName(string &filePath);
     static Table createTableFromStream(istream &stream, string tableName);
     static string getTimestamp();
 
@@ -40,10 +40,10 @@ private:
 public:
     // Used to create a new table from the provided filepath
     // It returns a pointer to the newly created object, which is `nullptr` if there was an error in the execution of the same
-    static Table createTable(const string &filePath);
+    static Table createTable(string filePath);
 
     // Used as a utility function to create table's on the fly by other components of the REPL
-    static Table createTableFromData(const string &data);
+    static Table createTableFromData(string &data);
 
     // Projects the specified fieldNames from the given table into a new table with uninitialized name
     // May throw a string error if the provided arguments are logically incoherent with respect to the table
@@ -56,7 +56,7 @@ public:
     Table intersection(Table &externalTable);
     Table difference(Table &externalTable);
     Table divide(Table &externalTable);
-    
+
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
 

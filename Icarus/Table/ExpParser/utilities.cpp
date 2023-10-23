@@ -60,7 +60,7 @@ bool ExpParser::applyComparisionOperator(TokenType &op, string &operand1, string
                 result = op1 != op2;
             return result;
         }
-        catch (const std::invalid_argument &e)
+        catch (invalid_argument &e)
         {
             cerr << "Invalid Argument: " << e.what() << endl;
             throw "Provided a number token but the value of the field could not be serialized to a numberic type.";

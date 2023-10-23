@@ -34,7 +34,7 @@ private:
     // Handlers for each of the respective commands
     void handleExit();
     void handleHi();
-    void handleLoadCSV(string &input);
+    void handleLoadCSV(string input);
 
 public:
     // Create a default constructor to set the Icarus instance on the parser
@@ -44,7 +44,7 @@ public:
     void startREPL();
     void setFieldWidth(int width);
     // Returns the name of the table that is formed after parsing the .csv file at the given location
-    string loadCSV(const string &filePath);
+    string loadCSV(string filePath);
     void execute(string input);
 };
 

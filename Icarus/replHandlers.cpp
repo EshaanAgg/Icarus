@@ -13,7 +13,7 @@ void Icarus::handleHi()
     cout << "Hi! I am Icarus, a simple REPL that allows you to perform Relational Algebra operations! Type a command to get started.\nYou can also refer to the documentation as to how to use the various commands!\n";
 }
 
-void Icarus::handleLoadCSV(string &input)
+void Icarus::handleLoadCSV(string input)
 {
     string filePath = input.substr(5);
     string name = loadCSV(filePath);

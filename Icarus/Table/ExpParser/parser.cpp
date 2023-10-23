@@ -84,7 +84,7 @@ Token ExpParser::getNextToken()
         return {TOK_OPEN_BRACE, "("};
     }
 
-    if (peek() == '(')
+    if (peek() == ')')
     {
         consume();
         return {TOK_CLOSE_BRACE, ")"};

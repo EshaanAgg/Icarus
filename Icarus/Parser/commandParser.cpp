@@ -13,7 +13,7 @@ class CommandParser
 {
 public:
     // Validates the passed commands and returns a CommandInfo struct
-    static CommandInfo parseCommand(const string &input)
+    static CommandInfo parseCommand(string &input)
     {
         // Remove leading and trailing whitespace
         string trimmedInput = trim(input);
@@ -83,7 +83,7 @@ public:
         return {trim(command), newArgs};
     }
 
-    static bool isCommand(const string &input)
+    static bool isCommand(string &input)
     {
         // Remove leading and trailing whitespace
         string trimmedInput = trim(input);
@@ -96,7 +96,7 @@ public:
 
 private:
     // Helper function to trim leading and trailing whitespace
-    static string trim(const string &str)
+    static string trim(string &str)
     {
         size_t first = str.find_first_not_of(" \t\n\r");
         size_t last = str.find_last_not_of(" \t\n\r");

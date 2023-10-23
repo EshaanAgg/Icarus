@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string Icarus::loadCSV(const string &filePath)
+string Icarus::loadCSV(string filePath)
 {
     try
     {

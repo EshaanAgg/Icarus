@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string Table::parseFileName(const string &filePath)
+string Table::parseFileName(string &filePath)
 {
     size_t slashPos = filePath.find_last_of("/\\"); // Find the last slash or backslash
     size_t dotPos = filePath.find_last_of(".");     // Find the last . (used to specify extension)
@@ -82,7 +82,7 @@ Table Table::createTableFromStream(istream &stream, string tableName)
     return table;
 }
 
-Table Table::createTable(const string &filePath)
+Table Table::createTable(string filePath)
 {
     // Check if the file exists
     ifstream file(filePath);
@@ -103,7 +103,7 @@ string Table::getTimestamp()
     return to_string(currentTime);
 }
 
-Table Table::createTableFromData(const string &data)
+Table Table::createTableFromData(string &data)
 {
     istringstream inputStringStream(data);
     return createTableFromStream(inputStringStream, "TEMP_" + getTimestamp());
