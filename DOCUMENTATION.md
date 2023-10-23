@@ -194,6 +194,8 @@ Here is a detailed documentation related to the syntax of the same:
 
 `DIFF(studentsA, studentsB)`
 
+---
+
 ### Division
 
 #### Syntax
@@ -209,6 +211,8 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `DIVIDE(studentEnrolledCourses, courses)`
+
+---
 
 ### Save
 
