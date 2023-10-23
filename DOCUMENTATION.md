@@ -71,7 +71,7 @@ Here is a detailed documentation related to the syntax of the same:
 
 #### Syntax
 
-`REANME(oldTableName, newTableName)`
+`RENAME(oldTableName, newTableName)`
 
 #### Use
 
