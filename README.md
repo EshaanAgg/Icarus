@@ -14,6 +14,7 @@ The following relational algebra operations have been implemented:
 - [Union](./DOCUMENTATION.md/#union)
 - [Intersection](./DOCUMENTATION.md/#intersection)
 - [Set Difference](./DOCUMENTATION.md/#set-difference)
+- [Division](./DOCUMENTATION.md/#division)
 
 These constitue a complete set of relational algebra operations, meaning that all other operations can be realized with the help of the composition of the same. A detailed documentation of the commands you can use in the REPL can be found in the [Documentation](./DOCUMENTATION.md).
 
@@ -32,10 +33,15 @@ The project uses `make` to bundle the dependencies and make a working executable
 
 To make an excutable of the [`main.cpp`](./main.cpp) file, you can use the `make compile` command in the terminal. To directly compile and run the program, you can use `make run` command, which first uses the `compile` command to make the executable and then tries to run it in the shell.
 
+The [`Makefile`](./Makefile) is designed with respect to Unix based systems. You can run the same on Windows by running the content of `compile` command manually on the terminal, and then running the generated binary (`main.exe` most probably)!
+
 ## Features
 
 - Built using the `OOPS` paradigm, which all of the data of a particular class being private by default and then only being exposed by the means of getters, setters and utility functions.
 - Use of pointers and referneces to ensure that no unecessary data is copied, ensuring better performance.
+- Utility checks are provided to ensure the validility of the operations on the tables they are applied on
+- Supports infinite nesting of commands
+- Supports reading and writing of all the table to and from disk
 - `Tables`
   - Utilities to view the table and it's content in the command line itself.
   - When creating new tables, ensures that the names of the tables and well all the headers in the same are distinct. Even the regularity of the structure of the table is ensured.

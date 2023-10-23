@@ -193,3 +193,20 @@ Here is a detailed documentation related to the syntax of the same:
 #### Sample
 
 `DIFF(studentsA, studentsB)`
+
+
+### Division
+
+#### Syntax
+
+`DIVIDE(table1, table2)`
+
+#### Use
+
+- Used to perform the division operation between two tables (`table1 / table2`).
+- Both the tables `table1` and `table2` can either be a name of the table in the database, or another relational operator which returns a table.
+- Both the tables must be division compatible, that is all the headers of the divisor table must be present in the dividend table (they might be in different orders: the command would re-arrange them)
+
+#### Sample
+
+`DIVIDE(studentEnrolledCourses, courses)`

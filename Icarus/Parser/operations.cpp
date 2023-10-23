@@ -227,3 +227,22 @@ Table Parser::performDifference(vector<string> args)
         throw error;
     }
 }
+
+Table Parser::performDivide(vector<string> args)
+{
+    if (args.size() != 2)
+        throw "INVALID_ARGS: Difference operation requires 2 arguments: (Table1, Table2). You supplied "s + to_string(args.size()) + " arguments."s;
+
+    try
+    {
+        Table table1, table2;
+        getTable(table1, args[0]);
+        getTable(table2, args[1]);
+
+        return table1.divide(table2);
+    }
+    catch (string error)
+    {
+        throw error;
+    }
+}

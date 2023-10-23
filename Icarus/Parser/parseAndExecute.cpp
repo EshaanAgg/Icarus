@@ -35,6 +35,8 @@ Table Parser::parseAndExecute(string cmd)
             return performIntersection(cmdInfo.arguments);
         else if (cmdInfo.command == "DIFF")
             return performDifference(cmdInfo.arguments);
+        else if (cmdInfo.command == "DIVIDE")
+            return performDivide(cmdInfo.arguments);
 
         throw "PROGRAMMING_ERROR: All supported command's haven't been registered a handler."s;
     }

@@ -1,2 +1,6 @@
+# Editor specific folders
 .vscode
+
+# Compiled binaries
 main
+main.exe

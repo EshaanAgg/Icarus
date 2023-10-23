@@ -55,6 +55,8 @@ public:
     Table Union(Table &externalTable);
     Table intersection(Table &externalTable);
     Table difference(Table &externalTable);
+    Table divide(Table &externalTable);
+    
     // Takes a reference to a table, and renames the same to the desired new name
     static void rename(Table &table, string newName);
 
